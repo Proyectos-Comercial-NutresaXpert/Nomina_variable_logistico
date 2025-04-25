@@ -1,0 +1,11 @@
+# Ignorar todos los archivos de Excel
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+
+
+# Ignorar chache python
+__pycache__/
+
+Nomina_Segunda_Parte/Insumos/*.xlsx

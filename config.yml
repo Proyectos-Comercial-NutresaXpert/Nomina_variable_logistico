@@ -1,0 +1,205 @@
+# Año y mes a medir
+mes_a_medir: 3
+an_actual: 2024
+
+# Ruta principal de insumos
+path_insumos: Insumos/
+
+
+maestra_temporales:
+  nom_base: Maestra Temporales.xlsx
+  nom_hoja: Maestra Acumulada
+  cols_fechas: &seccion_comun_cols_fechas
+   "FECHA DE INGRESO" : "FECHA DE INGRESO"
+   "FECHA DE RETIRO" : "FECHA DE RETIRO"
+  cols_mods:
+   <<: *seccion_comun_cols_fechas
+   "NUMERO DE IDENTIFICACIÓN" : "NUMERO DE IDENTIFICACIÓN"
+   "CARGO" : "CARGO" 
+   "ESTADO": "ESTADO"
+  cols_renombrar: &cols_temporales
+   "FECHA DE INGRESO" : "FECHA INGRESO"
+   "FECHA DE RETIRO" : "FECHA RETIRO"
+   "NOMBRE DE EMPRESA": "TEMPORAL"
+   "NUMERO DE IDENTIFICACIÓN" : "CEDULA"
+   "NOMBRES COMPLETOS" : "NOMBRES COMPLETOS" 
+   "APELLIDOS COMPLETOS" : "APELLIDOS COMPLETOS" 
+   "CARGO" : "CARGO" 
+   "REGIONAL": "REGIONAL FISICA"
+   "DISTRITO O SEDE DE LABORES": "DISTRITO"
+   "ESTADO": "ESTADO"
+  cols_cambiar_type_data:
+    <<: *seccion_comun_cols_fechas
+  query_filtrar_maestra: 
+    "`ESTADO` == 'ACTIVO' or (`FECHA DE RETIRO`.dt.month == @mes_a_medir and `FECHA DE RETIRO`.dt.year == @an_actual)"
+  query_depurador_ingreso:
+   "not (`FECHA DE INGRESO`.dt.month > @mes_a_medir and `FECHA DE INGRESO`.dt.year == @an_actual)"
+  query_retiros:
+   "`FECHA DE RETIRO`.dt.month == @mes_a_medir"
+  query_ingresos:
+   "`FECHA DE INGRESO`.dt.month == @mes_a_medir and `FECHA DE INGRESO`.dt.year == @an_actual"
+
+maestra_vinculados:
+  nom_base: Maestra Vinculados.xlsx
+  nom_hojas:
+    "Activos" : "Activos"
+    "Ingresos"  : "Ingresos"
+    "Licen no remun variab" : "Licen no remun variab"
+    "Vacac cargos espec Logist" : "Vacac cargos espec Logist"
+    "Incap cargos espec Logist" : "Incap cargos espec Logist"
+  col_cedula: &col_cedula
+    "CEDULA" : "CEDULA"
+  cols_necesarias_indiv :
+    "Activos": &cols_activos
+      <<: *col_cedula
+      "NOMBRE" : "NOMBRE"
+      "PRIMER APELLIDO": "PRIMER APELLIDO"
+      "SEGUNDO APELLIDO" : "SEGUNDO APELLIDO"
+      "CARGO" : "CARGO" 
+      "REGIONAL FISICA": "REGIONAL FISICA"
+      "DISTRITO": "DISTRITO"
+    "Ingresos":
+      <<: *col_cedula
+      "FECHA INGRESO" : "FECHA INGRESO"
+    "Licen no remun variab":
+      <<: *col_cedula
+    "Vacac cargos espec Logist": 
+      <<: *col_cedula
+      "DIAS HABILES EN EL MES" : "DIAS HABILES EN EL MES"
+    "Incap cargos espec Logist":
+      <<: *col_cedula
+      "Total" : "Total"
+
+maestra_para_pago:
+  cols_agregar_comunes: &cols_agregar_comunes
+   "META EGL" : ""
+   "RESULTADO EGL" : "" 
+   "% CONFIABILIDAD" : ""
+   "% META CONFIABILIDAD" : ""
+
+  maestra_vinculados:
+    cols_agregar: 
+     <<: *cols_agregar_comunes
+     TEMPORAL : ""
+     TIPO : "Vinculado"
+
+  maestra_temporales:
+    cols_agregar:
+     <<: *cols_agregar_comunes
+     TIPO : "Temporal"
+
+  cols_insumo_finales: 
+    - 'TIPO'
+    - 'TEMPORAL'
+    - 'CEDULA'
+    - 'NOMBRE'
+    - 'CARGO'
+    - 'REGIONAL FISICA'
+    - 'DISTRITO'
+    - 'FECHA INGRESO'
+    - 'FECHA RETIRO'
+    - 'OBSERVACIONES'
+    - 'META EGL'
+    - 'RESULTADO EGL'
+    - '% CONFIABILIDAD'
+    - '% META CONFIABILIDAD'
+    - 'VALOR'
+  
+  maestra_post_proceso: 
+    nom_base: "Maestra_post_proceso.xlsx"
+    nom_hoja: "Hoja1"
+    cols_numericas: &seccion_comun
+      "RESULTADO EGL": "RESULTADO EGL"
+      "META EGL": "META EGL"
+      "% CONFIABILIDAD": "% CONFIABILIDAD"
+      "% META CONFIABILIDAD": "% META CONFIABILIDAD"
+    cols_calculos: &cols_numericas_comp
+      "VALOR" : "VALOR"
+      "EJECUCION": "EJECUCION"
+      "VALOR PARCIAL": "VALOR PARCIAL"
+      "VALOR REAL": "VALOR REAL"
+      <<: *seccion_comun
+    dict_reemplazos:
+      col_referencia: "CARGO"
+      col_reemplazo: "VALOR"
+    filtros:
+      dias_habiles_en_el_mes:
+        columna: "DIAS HABILES EN EL MES"
+        valor_umbral: 8
+        operacion: "mayor"
+
+      total_incap:
+        columna: "Total"
+        operacion_entre:
+          valor_min: 16
+          valor_max: 60
+          operacion: "entre_a_b_valores"
+        operacion_mayor_igual:
+          valor_umbral: 60
+          operacion: "mayor_igual"
+
+    cambiar_type_data:
+      dias_habiles_tipo: float
+      total_incap_tipo: float
+ 
+Drivers:
+  dict_salarios_log: {
+    "OPERARIO(A) DE LOGISTICA": 80000,
+    "OPERARIO(A) DE MONTACARGA": 87000,
+    "AUXILIAR LOGISTICO": 80000,
+    "AUXILIAR DE OPERACIONES LOGISTICAS": 95000,
+    }
+  
+  cedulas_no_medibles:
+   - "10002032023"
+   - "10358394932"
+   - "23455554444"
+
+  dict_observaciones:
+    "Activos" : "Normal"
+    "Ingresos" : "Ingreso"
+    "Retiros" : "Retiro"
+    "Licen no remun variab" : "Licen no remun variab"
+    "Vacac cargos espec Logist" : "Vacaciones"
+    "Incap cargos espec Logist" : "Incapacidad"
+
+Resultados:
+  path_resultados: "Resultados/"
+  hoja_general : "Hoja1"
+  Maestra_para_procesos:
+   nom_base: "Maestra_para_procesos.xlsx"
+  Maestra_ingresos_ret:
+   nom_base: "Maestra_ingresos_ret.xlsx"
+  Base_para_pago:
+   nom_base: "Base_para_pago.xlsx"
+   path_leer: "Resultados\\Base_para_pago.xlsx"
+  Historico_act:
+   nom_base: "Historico_de_pago.xlsx"
+   path_leer: "Insumos\\Historico\\Historico_de_pago.xlsx"
+  
+dict_constantes: 
+  <<: *cols_temporales
+  <<: *cols_activos
+  <<: *cols_numericas_comp
+  "OBSERVACIONES" : "OBSERVACIONES"
+  "DIAS_TRABAJADOS" : "DIAS_TRABAJADOS"
+  "DIA_RETIRO" : DIA_RETIRO
+  "DIA_INGRESO" : "DIA_INGRESO"
+  "VALOR_DIA": VALOR_DIA
+  "ESTATUS_GARANTIZADO" : "ESTATUS_GARANTIZADO"
+  "MES_ACT" : "MES_ACT"
+  "NOVEDAD" : "Novedades"
+
+dias_en_mes : 
+  1: 31
+  2: 28
+  3: 31
+  4: 30
+  5: 31
+  6: 30
+  7: 31
+  8: 31
+  9: 30        
+  10: 31
+  11: 30
+  12: 31
