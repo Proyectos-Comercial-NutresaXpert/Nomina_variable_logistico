@@ -1,6 +1,6 @@
 # Ignorar todos los archivos de Excel
-
 *.xls
+*.xlsx
 *.xlsm
 *.xlsb
 
@@ -8,4 +8,4 @@
 # Ignorar chache python
 __pycache__/
 
-Nomina_Segunda_Parte/Insumos/
+/Insumos/
