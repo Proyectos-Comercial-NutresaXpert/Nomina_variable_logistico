@@ -1,6 +1,6 @@
 # Ignorar todos los archivos de Excel
 *.xls
-*.xlsx
+#*.xlsx
 *.xlsm
 *.xlsb
 
@@ -8,7 +8,7 @@
 # Ignorar chache python
 __pycache__/
 
-/Insumos/
+#/Insumos/
 
 # EXCEPCIÓN: Permitir subir Estructura_archivos1.xlsx
 !Estructura_archivos1.xlsx
