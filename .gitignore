@@ -9,3 +9,6 @@
 __pycache__/
 
 /Insumos/
+
+# EXCEPCIÓN: Permitir subir Estructura_archivos1.xlsx
+!Estructura_archivos1.xlsx

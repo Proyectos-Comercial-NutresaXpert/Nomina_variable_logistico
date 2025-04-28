@@ -1,6 +1,6 @@
 # Año y mes a medir
 mes_a_medir: 3
-an_actual: 2024
+an_actual: 2025
 
 # Ruta principal de insumos
 path_insumos: Insumos/
@@ -148,6 +148,7 @@ Drivers:
     "OPERARIO(A) DE MONTACARGA": 87000,
     "AUXILIAR LOGISTICO": 80000,
     "AUXILIAR DE OPERACIONES LOGISTICAS": 95000,
+    "Nuevo Cargo" : 90000,
     }
   
   cedulas_no_medibles:

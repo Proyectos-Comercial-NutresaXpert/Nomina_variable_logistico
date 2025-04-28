@@ -17,9 +17,9 @@ from calculos_maestra import CalculosPostProceso
 from historico_bonificacion import HistoricoBonificacion
 
 # Comentar las proximas 3 lineas para ejecutar en Visual estudio.
-#ruta_actual = os.getcwd()
-#ruta_padre = os.path.dirname(ruta_actual)
-#os.chdir(ruta_padre)
+ruta_actual = os.getcwd()
+ruta_padre = os.path.dirname(ruta_actual)
+os.chdir(ruta_padre)
 
 # Cargar configuración del proyecto
 config = GF.Procesar_configuracion("config.yml")

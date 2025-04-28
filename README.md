@@ -143,4 +143,44 @@ Posteriormente, guardamos el cambio como se indicó anteriormente, utilizando el
 ![Icono_no_guardado](Documentacion/Img/Icono_no_guardado.png) ➡️  ![Icono_guardado](Documentacion/Img/Icono_guardado.png)
 
 
+## Enlace al manual de usuario ejecución
 -[Documentación ejecucución"](Documentacion/manual_ejecución.md)
+
+
+
+## Informacion
+- Title:  Marketeeam Indirecta 
+- Authors: `Daniel Jaramillo Bustamante` / daniel.jaramillo@xpertgroup.co
+### Receptor - Comercial Nutresa.
+* **Aréa TI:**
+    * Sebastián Caro Aguirre scaro@comercialnutresa.com.co
+
+
+## Install & Dependence
+- Python 3.10 o superior. ( Idle )
+- pipenv
+
+## Use
+- Install dependencies
+
+  ```bash
+  pipenv install 
+  
+  pip install requeriments.txt
+
+  ```
+
+- software
+  ```
+  OS: Windows 10 - Windows 11 Home Edition
+  Python: 3.9.5 - 3.10 - 3.11
+  ```
+- hardware
+  ```
+  CPU: Intel-Core i5 - i7
+  GPU: None
+  ```
+  
+## License
+
+MIT
