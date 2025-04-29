@@ -17,7 +17,7 @@ Para ejecutar la automatización en cualquiera de las 3 partes, se sigue **el mi
 1. Ingresar al IDLE de Python:
    - Buscamos y abrimos **Python IDLE**.
 
-   ![alt text](open_idle_python.png)
+   ![alt text](Img/open_idle_python.png)
 
 ---
 
@@ -27,12 +27,12 @@ Para ejecutar la automatización en cualquiera de las 3 partes, se sigue **el mi
 
    - En la parte superior seleccionamos `Archivo` o `File`, y luego hacemos clic en `Open`.
 
-   ![alt text](open_main_in_idle.png)
+   ![alt text](Img/open_main_in_idle.png)
 
    - Se abrirá el explorador de archivos. Allí buscamos la **carpeta del proyecto**.
    - Entramos a la carpeta `Scripts` y seleccionamos el archivo `main.py`.
 
-   ![select_main](select_main.png)
+   ![select_main](Img/select_main.png)
 
 ✅ Se abrirá una nueva ventana.  
 En la parte superior vamos a `Run > Run Module`, y así iniciará la ejecución del proceso.
@@ -40,17 +40,17 @@ En la parte superior vamos a `Run > Run Module`, y así iniciará la ejecución 
 > **⚠️ Advertencia:**  
 > No debemos modificar nada en esta ventana, solo ejecutarla como se indica.
 
-![![run_module](run_module.png)
-](run_module.png)
+![![run_module](Img/run_module.png)
+](Img/run_module.png)
 
 ---
 
-## ⚡ 3. Ejecución del Proceso y Selección de Opciones
+## ⚡ 3. Ejecución del proceso y Selección de Opciones
 
 3. El proceso iniciará de inmediato, desplegando una nueva ventana que mostrará un **menú de opciones**.  
 Debemos ingresar el número correspondiente a la opción que queremos correr.
 
-![menu_opciones](menu_opciones.png)
+![menu_opciones](Img/menu_opciones.png)
 
 ---
 
@@ -60,19 +60,19 @@ Debemos ingresar el número correspondiente a la opción que queremos correr.
 Generar el archivo de **Ingresos y Retiros**, que se guarda automáticamente en la carpeta `/Insumos` (⚠️ No debemos modificarlo).  
 Además, se genera el archivo `Maestra_para_procesos.xlsx` en la carpeta `/Resultados`.
 
-   ![opcion1](opcion1.png)
+   ![opcion1](Img/opcion1.png)
 
 2️⃣ **Opción 2:**  
 Generar la **base de pago**.  
 Previamente, debes haber suministrado el insumo `Maestra_post_proceso.xlsx` en la carpeta `/Insumos` (producto de enviar el archivo generado en la opción 1 a la dependencia correspondiente en Comercial Nutresa para su diligenciamiento, y luego devolverlo).
 
-   ![opcion2](opcion2.png)
+   ![opcion2](Img/opcion2.png)
 
 3️⃣ **Opción 3:**  
 Generar el **histórico de pago**.  
 Este se guarda automáticamente en la carpeta `/Resultados/` como `Historico_para_pago.xlsx`.
 
-   ![opcion3](opcion3.png)
+   ![opcion3](Img/opcion3.png)
 
 ---
 
